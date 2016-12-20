@@ -1,0 +1,17 @@
+{
+  "name": "base-web-ui-sandbox",
+  "description": "Test web specific stuff",
+  "main": "index.js",
+  "authors": [
+    "jay bengco"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jaypinedabengco/base-web-ui-sandbox",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
