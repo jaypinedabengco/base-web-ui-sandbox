@@ -7,5 +7,6 @@
 
 ## Currently sandboxes are separated via branches : 
 * sandbox/video-player - sample for viewing videos with the following techs : 
-  * AWS S3
   * videojs ( http://videojs.com/ )
+  * jwplayer.com ( https://www.jwplayer.com/ )
+  * videogular ( http://www.videogular.com/)  
