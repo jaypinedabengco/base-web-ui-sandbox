@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>Base Web UI Sandbox</title>
+
+    <!--<script type='text/javascript' src='http://content.jwplatform.com/libraries/UKR2loxZ.js'></script>-->
+    <script type='text/javascript' src='../js/vendor/jwplayer-7.8.4/jwplayer.js'></script>
+    <script>jwplayer.key="R1GcgMc2Fnef0svhG1MP3sDONP6zmPkiine8Yg==";</script>
+    
+</head>
+<body>
+
+<H1>This video is streamed by CloudFront and played by JW Player 7.</H1>
+
+<!-- Replace RTMP-DISTRIBUTION-DOMAIN-NAME with the domain name of your 
+RTMP distribution, for example, s5678.cloudfront.net (begins with "s").
+
+Replace VIDEO-FILE-NAME with the name of your .mp4 or .flv video file, 
+including the .mp4 or .flv filename extension. For example, if you uploaded 
+my-vacation.mp4, enter my-vacation.mp4. You might need to prepend "mp4:" to the 
+name of your video file, for example, mp4:my-vacation.mp4.
+
+If the file is in a subdirectory, include the subdirectory name just before 
+the file name, for example:
+
+"rtmp://RTMP-DISTRIBUTION-DOMAIN-NAME/cfx/st/sample-directory/VIDEO-FILE-NAME"
+-->
+
+<div id="my-video"></div>
+<script type="text/javascript">
+jwplayer("my-video").setup({
+ file: "http://sandbox-interview-storage.s3.amazonaws.com/test_video_1234567.mp4",
+ width: "720",
+ height: "480"
+});
+</script>    
+
+</body>
+</html>
