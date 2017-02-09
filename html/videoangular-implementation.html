@@ -16,6 +16,11 @@
         text-align: center;        
     }
 
+    .time-skip {
+        padding: 10px;
+        cursor: pointer;
+    }
+
     .time-skip-current {
         background-color: rgba(0, 0, 0, 0.17);
     }
@@ -45,6 +50,8 @@
         }
     }
     </style>
+
+    <script src="../bower_components/moment/min/moment.min.js"></script>
 
     <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
@@ -83,11 +90,13 @@
 
 			<vg-overlay-play></vg-overlay-play>
 			<vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+            <vg-buffering></vg-buffering>
 		</videogular>
         <div class="tools">
             <div>
                 <button ng-click="controller.onChangeVideoToEarth();">Change Video to Earth</button>
                 <button ng-click="controller.onChangeVideoToThea();">Change Video to Thea</button>
+                <button ng-click="controller.changeVideoToQCAPsStream();">Change Video to QCAPs Stream</button>
             </div>
             <div>
                 <input ng-model="controller.seek_time_value"></input>
@@ -95,8 +104,11 @@
             </div>
             <div>
                 <span>SKIP</span> 
-                <span ng-repeat="time_skip in controller.time_skip_list" ng-class="time_skip == controller.seek_time_value ? 'time-skip-current' : ''">  
-                    <a href="javascript:void(0);" ng-click="controller.testSeekTime(time_skip)">{{time_skip}}</a> 
+                <span class="time-skip" 
+                      ng-repeat="time_skip in controller.time_skip_list" 
+                      ng-class="time_skip == controller.seek_time_value ? 'time-skip-current' : ''"
+                      ng-click="controller.testSeekTime(time_skip)">  
+                    {{controller.convertToTime(time_skip)}}
                 </span>
             </div>
 	    </div>        
