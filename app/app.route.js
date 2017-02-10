@@ -17,9 +17,12 @@
             .when('/home', {
                 templateUrl: 'views/home.view.html'
             })
-            .when('/sandbox', {
-                template : '<sandbox></sandbox>'
+            .when('/sandbox-html-to-canvas', {
+                template : '<sandbox-html-to-canvas></sandbox-html-to-canvas>'
             })
+            .when('/sandbox-pdf-make', {
+                template : '<sandbox-pdf-make></sandbox-pdf-make>'
+            })            
             .when('/404', {
                 templateUrl: 'views/404.view.html'
             })

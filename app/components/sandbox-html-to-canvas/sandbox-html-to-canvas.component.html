@@ -1,0 +1,30 @@
+<br />
+<div>
+    Reference : <a href="https://www.npmjs.com/package/angular-save-html-to-pdf" target="_blank">angular-save-html-to-pdf</a>
+</div>
+<br />
+<div> 
+
+    <button ng-click="$ctrl.createRandomId();" pdf-save-button="idOneGraph" pdf-name="123.pdf" class="btn">Download</button>
+    <h1>Download Content : </h1>
+    <div pdf-save-content="idOneGraph">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="table_object in $ctrl.content.tableObjects">
+                    <td>{{table_object.id}}</td>
+                    <td>{{table_object.firstname}}</td>
+                    <td>{{table_object.lastname}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h1>END</h1>
+
+</div>

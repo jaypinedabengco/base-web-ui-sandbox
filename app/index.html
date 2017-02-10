@@ -40,6 +40,15 @@
     <!-- inject-vendor:js -->      
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>     
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>    
+    <script src="bower_components/html2canvas/build/html2canvas.min.js"></script>
+    <script src="bower_components/jsPDF/dist/jspdf.debug.js"></script>
+    <script src="bower_components/angular-save-html-to-pdf/dist/saveHtmlToPdf.min.js"></script>    
+    <script src="bower_components/pdfmake/build/pdfmake.min.js"></script>    
+    <script src="bower_components/pdfmake/build/vfs_fonts.js"></script>    
+    <script src="bower_components/moment/min/moment.min.js"></script>    
+
+
     <!-- endinject -->
 
     <!-- inject:js -->
@@ -56,17 +65,17 @@
     <!-- components -->
     <script src="components/app-navigation/app-navigation.component.js"></script>
     <script src="components/sandbox/sandbox.component.js"></script>
+    <script src="components/sandbox-html-to-canvas/sandbox-html-to-canvas.component.js"></script>
+    <script src="components/sandbox-pdf-make/sandbox-pdf-make.component.js"></script>
     <!-- endinject -->    
 
     <!-- services -->
+    <script src="services/sandbox.service.js"></script>             
+    <script src="services/pdfmake.service.js"></script>                 
     <!-- endinject -->    
 
     <!-- directives-->
     <!-- endinject -->    
-
-    <!-- factories -->
-    <script src="services/sandbox.service.js"></script>             
-    <!-- endinject -->
 
     <!-- filters -->
     <!-- endinject -->

@@ -7,6 +7,7 @@
     angular
         .module('app', [   
             'ngRoute',
+            'htmlToPdfSave', 
             
             'app.service.module',
             'app.component.module'            
