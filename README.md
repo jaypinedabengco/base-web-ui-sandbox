@@ -14,4 +14,6 @@
 * sandbox-angularjs/master - base angularjs: 
 
 * sandbox-angularjs/html-to-pdf - convert html/js contents to pdf, for export :
+  * pdfmake ( https://github.com/bpampuch/pdfmake )
+  * angular-save-html-to-pdf ( https://www.npmjs.com/package/angular-save-html-to-pdf )
   
