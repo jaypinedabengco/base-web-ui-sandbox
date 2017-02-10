@@ -10,3 +10,8 @@
   * videojs ( http://videojs.com/ )
   * jwplayer.com ( https://www.jwplayer.com/ )
   * videogular ( http://www.videogular.com/)  
+  
+* sandbox-angularjs/master - base angularjs: 
+
+* sandbox-angularjs/html-to-pdf - convert html/js contents to pdf, for export :
+  
