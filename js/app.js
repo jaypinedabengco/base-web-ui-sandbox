@@ -1,1 +1,0 @@
-console.log('this is to test that the app connects to the js file properly', 'Hello World!');

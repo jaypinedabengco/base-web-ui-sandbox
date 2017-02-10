@@ -2,8 +2,8 @@
   "name": "base-web-ui-sandbox",
   "version": "1.0.0",
   "description": "Test web specific stuff",
-  "main": "index.js",
   "scripts": {
+    "start": "lite-server",    
     "ui": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

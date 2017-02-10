@@ -1,7 +1,6 @@
 {
   "name": "base-web-ui-sandbox",
-  "description": "Test web specific stuff",
-  "main": "index.js",
+  "version": "1.0.0",
   "authors": [
     "jay bengco"
   ],
@@ -13,5 +12,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ], 
+  "dependencies": {
+    "angular": "1.5.7",
+    "angular-route": "1.5.7"
+  }  
 }

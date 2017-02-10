@@ -1,4 +1,4 @@
-# base-web-ui-sandbox
+# base-web-ui-sandbox (angular)
 
 ## TO RUN
 * npm install
@@ -6,7 +6,5 @@
 * npm run ui
 
 ## Currently sandboxes are separated via branches : 
-* sandbox/video-player - sample for viewing videos with the following techs : 
-  * videojs ( http://videojs.com/ )
-  * jwplayer.com ( https://www.jwplayer.com/ )
-  * videogular ( http://www.videogular.com/)  
+* sandbox-angular/html-to-pdf - convert html to pdf using following : 
+    * ?
