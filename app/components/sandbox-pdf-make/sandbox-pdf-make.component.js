@@ -63,31 +63,50 @@
         }
 
         function populateFromService(){
-            var _user_data = vm.sampleData;
-            var _text_greetings = [ 
-                                        'Hello ', 
-                                        _user_data.firstname + ' ' + _user_data.lastname + '! ', 
-                                        'How are you?'
-                                    ];
+            pdfMakeService
+                .getBaseDocDefinition()
+                .then(function(baseDocDefinition){
 
-            var _table_body_friends_list = [];
-            _table_body_friends_list.push(['Firstname', 'Lastname', 'Age']);//header
-            _user_data.friendsList.forEach(function(_friend){
-                _table_body_friends_list.push([_friend.firstname, _friend.lastname, _friend.age]);                
-            });
+                /* - PREPARE Contents - */
 
-            pdfMakeService.getBaseDocDefinition().then(function(baseDocDefinition){
+                var _user_data = vm.sampleData;
+                var _text_greetings = [ 
+                                            'Hello ', 
+                                            _user_data.firstname + ' ' + _user_data.lastname + '! ', 
+                                            'How are you?'
+                                        ];
+
+
+                var _table_friends_list =  pdfMakeService.createTable(
+                                                    ['Firstname', 'Lastname', 'Age', 'Real Friend?'],
+                                                    ['*', '*', 'auto', 'auto']
+                                            );
+
+                //process body
+                _user_data.friendsList.forEach(function(_friend){
+                    var _real_friend = ( Math.floor(Math.random() * 1000 ) % 2 );
+
+                    var _field_icon = "cached_x_icon";
+                    if ( _real_friend )
+                        _field_icon = "cached_check_icon";
+
+                    _table_friends_list.body.push([
+                                                    pdfMakeService.createTableField(_friend.firstname), 
+                                                    pdfMakeService.createTableField(_friend.lastname), 
+                                                    pdfMakeService.createTableField(_friend.age),
+                                                    pdfMakeService.createTableFieldForIcon(_field_icon)
+                                                ]);                
+                });
+
+                 /* - END - */
+                
                 vm.pdf_DocDefinition = baseDocDefinition;
                 vm.pdf_DocDefinition.content = [
                     {
                         text : _text_greetings
                     },
                     {
-                        table : {
-                            headerRows : 1,
-                            widths : ['auto', 'auto', 'auto'],
-                            body : _table_body_friends_list
-                        }
+                        table : _table_friends_list
                     }                    
                 ];
 
