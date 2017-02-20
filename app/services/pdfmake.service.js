@@ -23,18 +23,23 @@
         var _cached_converted_images = [];
         var _base_pdf_template = {}
 
+        var _initalized_CustomTableLayouts = false;
+        
         //Services
         var services = {
             getBaseDocDefinition: getBaseDocDefinition,
             createTable : createTable,
             createTableHeader : createTableHeader,
             createTableField : createTableField,
-            createTableFieldForIcon : createTableFieldForIcon,             
+            createTableFieldForIcon : createTableFieldForIcon,      
             createColumnField : createColumnField,
             createTitle : createTitle,
             createLineSeperator : createLineSeperator,
             convertImageToBase64 : convertImageToBase64,
-            createPDFName : createPDFName
+            createPDFName : createPDFName, 
+
+            createHeaderInformationColumnObject : createHeaderInformationColumnObject,
+            createHeaderInformationContainer : createHeaderInformationContainer,                        
         }
         
         return services;
@@ -57,6 +62,8 @@
          */
         function getBaseDocDefinition(date_created){
             var deferred = $q.defer();
+            
+            initializeCustomTableLayouts(); //required for custom table headers
 
             //prepare resources first, like convert all images to base 64, etc.
             prepareAllResources().then(
@@ -207,7 +214,8 @@
                 widths : _width_per_headers,
                 body : [],                            
                 margin : 10,
-                alignment : 'center'
+                alignment : 'center',
+                dontBreakRows : true
             }
 
             //add headers, format using createTableHeader function
@@ -249,6 +257,83 @@
                             value
                         ]
                     };
+        }
+
+        /**
+         * 
+         * Layer Object ( refer to createHeaderInformationColumnObject function to get object structure)
+         */
+        function createHeaderInformationContainer(firstColumn, secondColumn){
+
+            var _processed_columns = [];
+
+            //internal function
+            var _columns_container_creator = function(column){
+                var _columns_container = {
+                    width : column.width,
+                    columns : []
+                };
+                var _columns = [];
+                if ( column.contents ){
+                    column.contents.forEach(function(content, i){                        
+                        var label = content.label;
+                        var value = content.value;
+                        _columns.push(services.createColumnField(label + " : ", value))
+                        
+                        if ( i < column.contents.length -1 )
+                            _columns.push('\n')
+                    });
+                }
+                _columns_container.columns.push(_columns);
+                return _columns_container;
+            };
+
+            //create
+            _processed_columns.push(_columns_container_creator(firstColumn));
+            if ( secondColumn )
+                _processed_columns.push(_columns_container_creator(secondColumn));
+
+            var _header_information = {
+                layout : 'headerInformationLayout',                
+                table : {
+                  widths : ['*'],                   
+                  body : [
+                      [{ 
+                          columns : _processed_columns,
+                          margin: [0, 10]
+                       }]
+                  ]
+                },
+                margin : [0, 10]
+             
+            };
+
+            return _header_information;
+
+        }
+
+        /**
+         * Object Structure
+         * 
+         *  - width : (string)
+         *  - contents : (array of objects)
+         *       - object
+         *              - label 
+         *              - value
+         */
+        function createHeaderInformationColumnObject(initial_width){
+            return {
+                width : (!initial_width)?'*':initial_width,
+                contents : [],
+                addContent : function(label, value){
+                    var _this = this;
+                    _this.contents.push({label : label, value : value})
+                }, 
+                setWidth : function(width){
+                    var _this = this;
+                    _this.width = width;
+                }
+            }
         }
 
         /**
@@ -334,8 +419,10 @@
             var deferred = $q.defer();
 
             if ( _cached_converted_images[image_name] ){
+                // console.log(image_name + " is already cached");
                 deferred.resolve(_cached_converted_images[image_name]);
             } else {
+                // console.log("caching " + image_name + " ...");
                 convertImageToBase64(_images_to_convert_location + image_name, function(base64_value){
                     _cached_converted_images[image_name] = base64_value;
                     deferred.resolve(base64_value);
@@ -378,6 +465,36 @@
             }
 
             return deferred.promise;            
+        }
+
+
+        /**
+         * Create Customized Header layouts
+         * 
+         * Check here on how to  : 
+         * https://github.com/bpampuch/pdfmake
+         */
+        function initializeCustomTableLayouts(){
+            if (_initalized_CustomTableLayouts) 
+                return;
+            _initalized_CustomTableLayouts = true;
+
+            pdfMake.tableLayouts = {
+                headerInformationLayout : {
+                    hLineWidth : function(i, node){
+                        return 2;
+                    },
+                    vLineWidth : function(i, node){
+                        return 0;
+                    },
+                    hLineColor : function(i, node){
+                        return '#000';
+                    },
+                    vLineColor : function(i, node){
+                        return '#000';
+                    }                                      
+                }
+            };
         }
 
     }

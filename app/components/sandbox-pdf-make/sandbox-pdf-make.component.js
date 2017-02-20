@@ -70,11 +70,11 @@
                 /* - PREPARE Contents - */
 
                 var _user_data = vm.sampleData;
-                var _text_greetings = [ 
-                                            'Hello ', 
-                                            _user_data.firstname + ' ' + _user_data.lastname + '! ', 
-                                            'How are you?'
-                                        ];
+
+
+                var _user_column = pdfMakeService.createHeaderInformationColumnObject();
+                    _user_column.addContent("User", _user_data.firstname + ' ' + _user_data.lastname);
+                var _header_info = pdfMakeService.createHeaderInformationContainer(_user_column);
 
 
                 var _table_friends_list =  pdfMakeService.createTable(
@@ -102,15 +102,13 @@
                 
                 vm.pdf_DocDefinition = baseDocDefinition;
                 vm.pdf_DocDefinition.content = [
+                    _header_info,
                     {
-                        text : _text_greetings
-                    },
-                    {
-                        table : _table_friends_list
-                    }                    
+                        table : _table_friends_list,
+                    }                
                 ];
 
-                loadPDFToIFrame();
+                // loadPDFToIFrame();
                 
             });
         }
